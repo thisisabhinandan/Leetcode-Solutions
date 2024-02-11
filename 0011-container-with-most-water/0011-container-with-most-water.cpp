@@ -6,7 +6,7 @@ public:
         
         while(l<r)
         {
-            area=(r-l)*min(height[l],height[r]);
+            area=abs((l-r))*min(height[l],height[r]);
             ans=max(ans,area); 
             if(height[l]<height[r])
             {
