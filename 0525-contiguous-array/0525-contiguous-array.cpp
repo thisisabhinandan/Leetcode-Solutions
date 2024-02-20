@@ -15,10 +15,9 @@ public:
             {
                 len=max(len,i-mp[psum-k]);
             }
-            if(mp.find(psum)==mp.end())
-            {
+            else
                 mp[psum]=i;
-            }
+            
         }
         return len; 
     }
