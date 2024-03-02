@@ -5,12 +5,11 @@ public:
         while(l<=nums1.size()-1 && r<=nums2.size()-1)
         {
             if(nums1[l]<=nums2[r]) {
-                if(l<=r) ans=max(ans,r-l);
+                ans=max(ans,r-l);
                 r++;
             }
             else 
-                
-            l++;
+                l++;
         }
         return ans;
     }
