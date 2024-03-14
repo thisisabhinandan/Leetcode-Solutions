@@ -1,13 +1,13 @@
 class Solution {
 public:
-    bool canJump(vector<int>& arr) {
-   int n=arr.size(); 
-    int possible_reach = 0;
-    for(int i=0; i<n; i++)
-    {
-        if(i>possible_reach) return false;
-        possible_reach = max(possible_reach, i+arr[i]);
+    bool canJump(vector<int>& nums) {
+        int pos=0; 
+       for(int i=0;i<nums.size();i++)
+       {
+           if(i>pos) return false;
+           pos=max(pos,i+nums[i]);
+           
+       }
+        return true; 
     }
-    return true;
-}
-}; 
+};
