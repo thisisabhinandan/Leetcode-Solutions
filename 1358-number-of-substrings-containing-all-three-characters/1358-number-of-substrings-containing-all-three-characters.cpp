@@ -10,6 +10,7 @@ public:
             else if(s[i]=='c') {c++;}
             while(a>0 && b>0 && c>0)
             {
+                 ans+=n-i;
                 if(s[j]=='a')
                 {
                     a--;
@@ -24,8 +25,8 @@ public:
                 }
                 j++;
             }
-            ans+=i-j+1;
+            // use ans+=i-j+1 and tot subarrays-ans instead of n-i
         }
-        return tot - ans;
+        return ans;
     }
 };
