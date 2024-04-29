@@ -1,14 +1,23 @@
 class Solution {
 public:
-    int numSubarraysWithSum(vector<int>& nums, int goal) {
-        int ans=0; unordered_map<int,int>mp; 
-        mp[0]=1; int psum=0; 
+    int atmost(vector<int>& nums, int goal)
+    {
+         
+        int ans=0; int j=0; int sum=0; int n=nums.size();
         for(int i=0;i<nums.size();i++)
         {
-            psum+=nums[i];
-            ans=ans+mp[psum-goal];
-            mp[psum]++;
+            sum+=nums[i];
+            
+            while(sum>goal && i>=j)
+            {
+                sum-=nums[j];
+                j++;
+            }
+            ans+=i-j+1;
         }
         return ans; 
+    }
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+        return atmost(nums,goal)-atmost(nums,goal-1);
     }
 };
