@@ -8,7 +8,7 @@ public:
         }
         for(int i=0;i<a.length();i++)
         {
-             if(mp[a[i]]!=0) mp[a[i]]--;
+             if(mp[a[i]]>0) mp[a[i]]--;
              else return false;
         }
         return true;
