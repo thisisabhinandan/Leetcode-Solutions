@@ -6,12 +6,12 @@ class Solution {
         {
             mp.put(nums[i],mp.getOrDefault(nums[i],0)+1);
         }
-        PriorityQueue<Map.Entry<Integer,Integer>>pq=new PriorityQueue<>(
-        (a,b)-> b.getValue()-a.getValue()); 
-        pq.addAll(mp.entrySet());
+        PriorityQueue<Integer>pq=new PriorityQueue<>(
+        (a,b)-> mp.get(b)-mp.get(a)); 
+        pq.addAll(mp.keySet());
         for(int i=0;i<k;i++)
         {
-            result[i]=pq.poll().getKey();
+            result[i]=pq.poll();
         }
         return result;
     }
