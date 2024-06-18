@@ -4,10 +4,7 @@ class Solution {
         for(int i=0;i<nums.length;i++)
         {
             pq.add(nums[i]);
-        }
-        while(pq.size()>k)
-        {
-            pq.poll();
+            if(pq.size()>k) pq.poll();
         }
         return pq.peek();
     }
