@@ -9,7 +9,8 @@ class Solution {
         }
        while(!pq.isEmpty()&&k!=0)
        {
-           ans=pq.poll();
+           ans=pq.peek();
+           pq.poll();
            k--;
        }
         return ans;
