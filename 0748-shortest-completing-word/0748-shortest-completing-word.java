@@ -1,44 +1,41 @@
 class Solution {
     public String shortestCompletingWord(String licensePlate, String[] words) {
-        // Create a frequency map for the characters in the license plate
-        Map<Character, Integer> licenseMap = new HashMap<>();
-        for (int i = 0; i < licensePlate.length(); i++) {
-            char c = Character.toLowerCase(licensePlate.charAt(i));
-            if (c >= 'a' && c <= 'z') {
-                licenseMap.put(c, licenseMap.getOrDefault(c, 0) + 1);
+        Map<Character,Integer> mp=new HashMap<>();  
+        String ans=""; int len=16; String str=licensePlate.toLowerCase();
+        
+        for(int i=0;i<str.length();i++)
+        {
+            char c=str.charAt(i);
+            if(c>='a'&&c<='z') mp.put(c,mp.getOrDefault(c,0)+1);
+        } 
+         
+        for(int i=0;i<words.length;i++)
+        {
+            String s=words[i]; 
+            boolean b=true; 
+            Map<Character,Integer> mp1=new HashMap<>();
+            for(int j=0;j<s.length();j++)
+            {
+            char c=s.charAt(j);
+            mp1.put(c,mp1.getOrDefault(c,0)+1);
             }
-        }
-
-        String result = null;
-        for (String word : words) {
-            if (isValidCompletingWord(word, licenseMap)) {
-                if (result == null || word.length() < result.length()) {
-                    result = word;
+            for(char c:mp.keySet())
+            {
+                if(!mp1.containsKey(c)||mp.get(c)>mp1.get(c))
+                {
+                    b=false;
+                    break;
+                }
+            }
+            if(b)
+            {
+                if(len>s.length())
+                {
+                    ans=s;
+                    len=s.length();
                 }
             }
         }
-
-        return result;
+        return ans;
     }
-
-    private boolean isValidCompletingWord(String word, Map<Character, Integer> licenseMap) {
-        // Create a frequency map for the characters in the word
-        Map<Character, Integer> wordMap = new HashMap<>();
-        for (int i = 0; i < word.length(); i++) {
-            char c = Character.toLowerCase(word.charAt(i));
-            wordMap.put(c, wordMap.getOrDefault(c, 0) + 1);
-        }
-
-        // Check if the word contains all the characters in the licenseMap with required frequency
-        for (Map.Entry<Character, Integer> entry : licenseMap.entrySet()) {
-            char key = entry.getKey();
-            int count = entry.getValue();
-            if (wordMap.getOrDefault(key, 0) < count) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
 }
