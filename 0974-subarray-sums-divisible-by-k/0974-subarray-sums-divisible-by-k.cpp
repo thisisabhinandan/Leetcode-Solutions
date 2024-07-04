@@ -6,9 +6,7 @@ public:
         for(int i=0;i<nums.size();i++)
         {
             sum+=nums[i];
-            int rem=sum%k;
-            if(rem<0) rem+=k;
-            mp[rem]++;
+            mp[(sum%k+k)%k]++;
         }
         for(auto i:mp)
         {
