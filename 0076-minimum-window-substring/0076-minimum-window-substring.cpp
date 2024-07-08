@@ -1,38 +1,33 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        map<char, int> smp, tmp;
-        for (char c : t) {
-            tmp[c]++;
+        unordered_map<char,int> tmp; int cnt=t.size(); long long int j=0; 
+        int minlen=1e9; long long int minstart=0;
+        for(int i=0;i<t.length();i++)
+        {
+           tmp[t[i]]++;
         }
-        
-        int left = 0, right = 0, start = 0, minLen = INT_MAX;
-        int count = 0; // Number of characters matched from `t`
-        
-        for (right = 0; right < s.size(); right++) {
-            if (tmp.find(s[right]) != tmp.end()) {
-                smp[s[right]]++;
-                if (smp[s[right]] <= tmp[s[right]]) {
-                    count++;
-                }
+        for(int i=0;i<s.length();i++)
+        {
+            if(tmp[s[i]]>0)
+            {
+                cnt--;
             }
-            
-            while (count == t.size()) {
-                if (right - left + 1 < minLen) {
-                    minLen = right - left + 1;
-                    start = left;
+            tmp[s[i]]--;
+            while(cnt==0)
+            {
+                if(i-j+1<minlen)
+                {
+                    minstart=j;
+                    minlen=i-j+1;
                 }
-                
-                if (tmp.find(s[left]) != tmp.end()) {
-                    smp[s[left]]--;
-                    if (smp[s[left]] < tmp[s[left]]) {
-                        count--;
-                    }
-                }
-                left++;
+                tmp[s[j]]++;
+                if(tmp[s[j]]>0) cnt++;
+                j++;
             }
         }
-        
-        return (minLen == INT_MAX) ? "" : s.substr(start, minLen);
+        if(minlen==1e9) return "";
+        else return s.substr(minstart,minlen);
     }
+
 };
