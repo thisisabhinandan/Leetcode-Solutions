@@ -1,16 +1,11 @@
 class Solution {
 public:
     int findTheWinner(int n, int k) {
-        vector<int> ans;
-        for(int i=1;i<=n;i++)
-        {
-            ans.push_back(i);
-        } int i=0;
-        while(ans.size()>1)
-        {
-            i=(i+k-1)%ans.size();
-            ans.erase(ans.begin()+i);
-        }
-        return ans[0]; 
+        return solve(n,k)+1;
+    }
+    int solve(int n,int k)
+    {
+        if(n==0) return 0; 
+        return (solve(n-1,k)+k)%n;
     }
 };
