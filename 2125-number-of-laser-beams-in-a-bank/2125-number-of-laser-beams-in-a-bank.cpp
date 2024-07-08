@@ -1,7 +1,7 @@
 class Solution {
 public:
     int numberOfBeams(vector<string>& bank) {
-        int n=bank.size(); int m=bank[0].size(); vector<int>nums;  int cnt=0; int ans=0; 
+        int n=bank.size(); int m=bank[0].size(); vector<int>nums; int prev=0; int cnt=0; int ans=0; 
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
@@ -11,13 +11,13 @@ public:
                    cnt++;
                 }
             }
-            if(cnt>0) nums.push_back(cnt);
+            if(cnt!=0)
+            {
+                ans+=prev*cnt;
+                prev=cnt;
+            }
             cnt=0;
         } 
-        for(int i=1;i<nums.size();i++)
-        {
-            ans+=nums[i-1]*nums[i];
-        }
         return ans;
     }
 };
