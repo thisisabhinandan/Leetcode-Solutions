@@ -8,7 +8,7 @@ public:
             for(int j=0;j<n;j++)
             {
                 r[i]=max(r[i],grid[i][j]);
-                c[i]=max(c[i],grid[j][i]);
+                c[j]=max(c[j],grid[i][j]);
             }
         }
         for(int i=0;i<n;i++)
