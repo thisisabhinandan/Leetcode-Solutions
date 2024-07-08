@@ -1,27 +1,25 @@
 class Solution {
 public:
     int passThePillow(int n, int time) {
-        int pos=1; 
-        bool fwd=true; 
-        for(int i=1;i<=time;i++)
+        int fwd=true; int i=1; 
+        while(time--)
         {
             if(fwd==true)
             {
-                pos++; 
-                if(pos==n)
+                i++;
+                if(i==n) 
                 {
                     fwd=false;
                 }
             }
-            else
-            {
-                pos--;
-                if(pos==1)
+            else{
+                i--;
+                if(i==1)
                 {
                     fwd=true;
                 }
             }
         }
-        return pos;
+        return i;
     }
 };
