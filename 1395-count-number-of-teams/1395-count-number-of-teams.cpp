@@ -3,7 +3,7 @@ public:
     int numTeams(vector<int>& rating) {
        int n=rating.size();
         int teamcount=0;
-        for(int i=0;i<n;i++)
+        for(int i=1;i<n;i++)
         {
             int greaterleft=0; int greaterright=0;
             int lesserleft=0; int lesserright=0; 
