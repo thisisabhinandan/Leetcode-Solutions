@@ -18,7 +18,7 @@ public:
     long long maxtrip(vector<int>& time, long long mid) {
         long long sum = 0;
         for (int i=0;i<time.size();i++) {
-            sum += mid / (long long)time[i]; // Calculate the number of trips that can be made
+            sum += mid / time[i]; // Calculate the number of trips that can be made
         }
         return sum;
     }
