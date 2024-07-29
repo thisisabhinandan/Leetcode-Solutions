@@ -10,16 +10,15 @@ public:
         {
             if(st.find(nums[i]-1)==st.end())
             {
-                int curr=nums[i]; 
-                int len=1; 
-                while(st.find(curr+1)!=st.end())
+               int curr=nums[i]; int cnt=1;
+               while(st.find(curr+1)!=st.end())
                 {
-                    curr++; 
-                    len++;
+                   curr++;
+                   cnt++;
                 }
-                ans=max(ans,len);
+                ans=max(cnt,ans);
             }
         }
-        return ans;
+        return ans; 
     }
 };
