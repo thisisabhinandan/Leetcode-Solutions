@@ -1,9 +1,8 @@
 class Solution {
 public:
-    int buyChoco(vector<int>& prices, int money) { 
-        sort(prices.begin(),prices.end());
-        if(prices[0]+prices[1]<=money) return money-prices[0]-prices[1]; 
+    int buyChoco(vector<int>& prices, int money) {
+        sort(prices.begin(),prices.end()); 
+        if((prices[0]+prices[1])<=money) return abs(prices[0]+prices[1]-money);
         else return money;
     }
-    
 };
