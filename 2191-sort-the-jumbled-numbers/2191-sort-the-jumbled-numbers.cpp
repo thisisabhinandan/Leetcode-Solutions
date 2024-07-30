@@ -26,7 +26,7 @@ public:
             }
             newnums.push_back({newnum,i});
         }
-        stable_sort(newnums.begin(),newnums.end());
+        sort(newnums.begin(),newnums.end());
         vector<int> ans; 
         for(int i=0;i<newnums.size();i++)
         {
