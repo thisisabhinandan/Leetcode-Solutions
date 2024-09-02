@@ -4,7 +4,7 @@ class Solution {
         int n=mat.length; int m=mat[0].length; 
         int [] original=new int[n*m]; 
         int idx=0;
-          if (n * m != r * c) {
+        if (n*m!=r*c) {
             return mat;
         }
         for(int i=0;i<n;i++)
