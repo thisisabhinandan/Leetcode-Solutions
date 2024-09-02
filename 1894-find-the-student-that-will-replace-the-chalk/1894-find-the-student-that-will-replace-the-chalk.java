@@ -8,11 +8,11 @@ class Solution {
         k%=tot;
         for(int i=0;i<chalk.length;i++)
         {
-            if(k-chalk[i]<0)
-            {
-                return i; 
-            }
             k=k-chalk[i];
+            if(k<0)
+            {
+                return i;
+            }
         }
         return -1;
         
