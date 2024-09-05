@@ -1,13 +1,17 @@
 class Solution {
     public int firstUniqChar(String s) {
-        Map<Character,Integer>mp=new HashMap<>(); 
+       LinkedHashMap<Character,Integer> mp = new LinkedHashMap<>(); 
         for(int i=0;i<s.length();i++)
         {
-            mp.put(s.charAt(i),mp.getOrDefault(s.charAt(i),0)+1);
+            mp.put(s.charAt(i),mp.getOrDefault(s.charAt(i),0)+1); 
         }
-        for(int i=0;i<s.length();i++)
+        for(Map.Entry<Character,Integer> entry:mp.entrySet())
         {
-            if(mp.get(s.charAt(i))==1) return i;
+            if(entry.getValue()==1)
+            {
+                char ch=entry.getKey();
+                return s.indexOf(ch);
+            }
         }
         return -1;
     }
