@@ -18,7 +18,7 @@ class Solution {
             }
             else 
             {
-                h=mid-1;
+               h=mid-1;
             }
         }
         return -1;
