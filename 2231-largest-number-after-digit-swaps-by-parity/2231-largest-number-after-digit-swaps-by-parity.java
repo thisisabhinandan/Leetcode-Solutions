@@ -12,7 +12,7 @@ class Solution {
                 }
             }
         }
-        return Integer.parseInt(String.valueOf(ch));
+        return Integer.valueOf(String.valueOf(ch));
     }
     public char [] swap(char [] ch, int i , int j)
     {
