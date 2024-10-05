@@ -1,19 +1,37 @@
 class Solution {
 public:
-    int foo(vector<int>& nums, int target, int i, vector<vector<int>>& dp)
-    {if(i == nums.size()){
-            if(target == 0)
-                return 1;   // target reached, hence increase count of solution
-            else
-                return 0;   //else dont increase
-        }
-        
-        if(dp[i][target+2000]!=-1) return dp[i][target+2000]; 
-        return dp[i][target+2000]=foo(nums,target-nums[i],i+1,dp)+foo(nums,target+nums[i],i+1,dp);
-    }
+    #define MOD 1000000007
+
     int findTargetSumWays(vector<int>& nums, int target) {
-        vector<vector<int>> dp(nums.size()+1,vector<int>(5005,-1));
-        return foo(nums,target,0,dp);
+       int sum = 0;
+    for (int num : nums) {
+        sum += num;
+    }
+    
+    // Check if (sum + target) is even and non-negative.
+    if ((sum + target) % 2 != 0 || (sum + target) < 0) {
+        return 0;
+    }
+    
+    int newTarget = (sum + target) / 2;
+    if (newTarget > sum) {
+        return 0;
+    }
+    
+    int n = nums.size();
+    
+    // DP array to store the count of subsets.
+    std::vector<int> dp(newTarget + 1, 0);
+    dp[0] = 1;
+    
+    // Fill the DP array.
+    for (int i = 0; i < n; ++i) {
+        for (int j = newTarget; j >= nums[i]; --j) {
+            dp[j] = (dp[j] + dp[j - nums[i]]) % MOD;
+        }
+    }
+    
+    // Result is in dp[newTarget].
+    return dp[newTarget];
     }
 };
-
