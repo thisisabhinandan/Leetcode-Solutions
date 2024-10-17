@@ -15,7 +15,7 @@ class Solution {
                 rightidx=maxidx;
             }
         }
-        if(leftidx==-1) return num; 
+        if(leftidx==-1||rightidx==-1) return num; 
         char ch=chars[leftidx];
         chars[leftidx]=chars[rightidx];
         chars[rightidx]=ch; 
