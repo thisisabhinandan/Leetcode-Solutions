@@ -1,35 +1,49 @@
 class Solution {
     public int maxMoves(int[][] grid) {
-        int n = grid.length;      // Number of rows
-        int m = grid[0].length;   // Number of columns
-        int[][] dp = new int[n][m];
-        int maxMoves = 0;
+        int n = grid.length;  // Number of rows
+        int m = grid[0].length;  // Number of columns
+        int[][] dp = new int[n][m];  // DP array to store the max number of moves from each cell
 
-        // Initialize dp array: dp[i][0] = 0 for all rows i
+        // Fill the dp array for each cell in the first column
         for (int i = 0; i < n; i++) {
-            dp[i][0] = 0;
+            dp[i][0] = 1;  // We can start from any cell in the first column
         }
 
-        // Fill the dp table
-        for (int j = 1; j < m; j++) {              // For each column starting from the second
-            for (int i = 0; i < n; i++) {          // For each row
-                dp[i][j] = -1;                     // Initialize dp[i][j] to -1 (unreachable)
-                // Check the three possible previous positions
-                for (int dir = -1; dir <= 1; dir++) {
-                    int prevRow = i + dir;
-                    int prevCol = j - 1;
-                    // Check if previous position is within bounds
-                    if (prevRow >= 0 && prevRow < n) {
-                        // Check if the move is valid
-                        if (grid[prevRow][prevCol] < grid[i][j] && dp[prevRow][prevCol] != -1) {
-                            dp[i][j] = Math.max(dp[i][j], dp[prevRow][prevCol] + 1);
-                        }
-                    }
+        // Iterate through each column starting from the first one to fill the DP table
+        for (int j = 1; j < m; j++) {  // Iterate through columns from left to right
+            for (int i = 0; i < n; i++) {  // Iterate through rows for each column
+                int maxPrevious = 0;
+
+                // Top-right move
+                if (i > 0 && grid[i][j] > grid[i - 1][j - 1]) {
+                    maxPrevious = Math.max(maxPrevious, dp[i - 1][j - 1]);
                 }
-                maxMoves = Math.max(maxMoves, dp[i][j]);  // Update the maximum number of moves
+
+                // Direct right move
+                if (grid[i][j] > grid[i][j - 1]) {
+                    maxPrevious = Math.max(maxPrevious, dp[i][j - 1]);
+                }
+
+                // Bottom-right move
+                if (i < n - 1 && grid[i][j] > grid[i + 1][j - 1]) {
+                    maxPrevious = Math.max(maxPrevious, dp[i + 1][j - 1]);
+                }
+
+                // Update dp[i][j] if there is a valid move from any of the previous cells
+                if (maxPrevious > 0) {
+                    dp[i][j] = maxPrevious + 1;
+                }
             }
         }
 
-        return maxMoves < 0 ? 0 : maxMoves;
+        // Find the maximum value in the dp array
+        int maxMoves = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                maxMoves = Math.max(maxMoves, dp[i][j]);
+            }
+        }
+
+        return maxMoves - 1;  // Subtract 1 to account for initial move
     }
 }
