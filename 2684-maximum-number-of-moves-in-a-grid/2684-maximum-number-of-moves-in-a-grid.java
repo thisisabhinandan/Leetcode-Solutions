@@ -11,11 +11,11 @@ class Solution {
         {
             for(int i=0;i<n;i++)
             {
-                if(i+1<n && grid[i][j]>grid[i+1][j-1] && dp[i+1][j-1]!=0)
+                if(i!=n-1 && grid[i][j]>grid[i+1][j-1] && dp[i+1][j-1]!=0)
                 {
                     dp[i][j]=Math.max(1+dp[i+1][j-1],dp[i][j]);
                 }
-                if(i-1>=0 && grid[i][j]>grid[i-1][j-1] && dp[i-1][j-1]!=0)
+                if(i!=0 && grid[i][j]>grid[i-1][j-1] && dp[i-1][j-1]!=0)
                 {
                     dp[i][j]=Math.max(1+dp[i-1][j-1],dp[i][j]);
                 }
