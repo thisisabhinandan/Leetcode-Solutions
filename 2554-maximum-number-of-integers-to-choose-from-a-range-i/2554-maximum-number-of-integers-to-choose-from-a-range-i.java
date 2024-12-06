@@ -5,23 +5,20 @@ class Solution {
         {
             st.add(banned[i]);
         }
-        List<Integer> nums=new ArrayList<>();
+        int curr=0; int cnt=0;
         for(int i=1;i<=n;i++)
         {
-            if(!st.contains(i))
+            if(st.contains(i))
             {
-                nums.add(i);
+                continue;
             }
-        } int curr=0; int cnt=0;
-        for(int i=0;i<nums.size();i++)
-        {
-            if(nums.get(i)+curr>maxsum)
+            if(i+curr>maxsum)
             {
                 break;
             }
             else{
                 cnt++;
-                curr+=nums.get(i);
+                curr+=i;
             }
         }
         return cnt;
