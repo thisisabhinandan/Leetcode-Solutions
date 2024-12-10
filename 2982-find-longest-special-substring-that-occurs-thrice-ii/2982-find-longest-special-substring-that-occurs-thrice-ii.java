@@ -15,7 +15,7 @@ class Solution {
             i = j;
         }
 
-        int lo = 1, hi = n - 1, res = -1;
+        int lo = 1, hi = n , res = -1;
         while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
             if (check(cnt, mid)) {      
