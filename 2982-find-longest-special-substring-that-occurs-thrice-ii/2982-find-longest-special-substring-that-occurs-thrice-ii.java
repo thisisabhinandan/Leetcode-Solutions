@@ -1,41 +1,44 @@
 class Solution {
-
     public int maximumLength(String s) {
-        int[][] frequency = new int[26][s.length() + 1];
-        char previousCharacter = s.charAt(0);
-        int substringLength = 1;
+        Map<Character, List<Integer>> cnt = new HashMap<>();
+        int n = s.length();
 
-        frequency[s.charAt(0) - 'a'][1] = 1;
-        int ans = -1;
+        // 统计连续字符段的长度
+        int i = 0;
+        while (i < n) {
+            char currentChar = s.charAt(i);
+            int j = i;
+            while (j < n && s.charAt(j) == currentChar) {
+                j++;
+            }
+            cnt.computeIfAbsent(currentChar, x -> new ArrayList<>()).add(j - i);
+            i = j;
+        }
 
-        for (int charIdx = 1; charIdx < s.length(); charIdx++) {
-            char currentCharacter = s.charAt(charIdx);
-            // If the current character is equal to the previous character, add it to the
-            // mapping and increment the substring length.
-            if (currentCharacter == previousCharacter) {
-                substringLength++;
-                int count = 1;
-                frequency[currentCharacter - 'a'][substringLength] += 1;
+        int lo = 1, hi = n - 1, res = -1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (check(cnt, mid)) {      
+                lo = mid + 1;      
             } else {
-                // Otherwise, reset substring length to 1.
-                previousCharacter = currentCharacter;
-                substringLength = 1;
-                frequency[currentCharacter - 'a'][1] += 1;
+                hi = mid - 1;
             }
         }
 
-        // Calculate the cumulative sum from the end for every character and find the
-        // maximum possible answer.
-        for (int charIdx = 0; charIdx < 26; charIdx++) {
-            for (int len = s.length() - 1; len >= 0; len--) {
-                frequency[charIdx][len] += frequency[charIdx][len + 1];
-                if (frequency[charIdx][len] >= 3) {
-                    ans = Math.max(ans, len);
-                    break;
+        return lo-1 == 0 ? -1 : lo-1;
+    }
+    private boolean check(Map<Character, List<Integer>> cnt, int length) {
+        for (List<Integer> vec : cnt.values()) {
+            int count = 0;
+            for (int x : vec) {
+                if (x >= length) {
+                    count += x - length + 1;
                 }
             }
+            if (count >= 3) {
+                return true;
+            }
         }
-
-        return ans;
+        return false;
     }
 }
