@@ -1,41 +1,39 @@
 class Solution {
     public int minFallingPathSum(int[][] grid) {
-        int n = grid.length;
-        int prevMin = 0, prevSecondMin = 0, prevMinIndex = -1;
-
-        for (int i = 0; i < n; i++) {
-            int currMin = Integer.MAX_VALUE;
-            int currSecondMin = Integer.MAX_VALUE;
-            int currMinIndex = -1;
-
-            // Traverse the current row
-            for (int j = 0; j < n; j++) {
-                int currVal = grid[i][j];
-
-                // Add the smallest valid value from the previous row
-                if (j != prevMinIndex) {
-                    currVal += prevMin;
-                } else {
-                    currVal += prevSecondMin;
+        int n=grid.length; 
+        int prevmin=0;
+        int prevsmin=0;
+        int prevminidx=-1;
+        for(int i=0;i<n;i++)
+        {
+            int currmin=Integer.MAX_VALUE;
+            int currsmin=Integer.MAX_VALUE;
+            int currminidx=-1;
+            for(int j=0;j<n;j++)
+            {
+                int currval=grid[i][j];
+                if(j!=prevminidx)
+                {
+                    currval+=prevmin;
                 }
-
-                // Update the minimums for the current row
-                if (currVal < currMin) {
-                    currSecondMin = currMin;
-                    currMin = currVal;
-                    currMinIndex = j;
-                } else if (currVal < currSecondMin) {
-                    currSecondMin = currVal;
+                else{
+                    currval+=prevsmin;
+                }
+                if(currval<currmin)
+                {
+                    currsmin=currmin;
+                    currmin=currval;
+                    currminidx=j;
+                }
+                else if(currval<currsmin)
+                {
+                    currsmin=currval;
                 }
             }
-
-            // Update the values for the next row
-            prevMin = currMin;
-            prevSecondMin = currSecondMin;
-            prevMinIndex = currMinIndex;
+            prevmin=currmin;
+            prevsmin=currsmin;
+            prevminidx=currminidx;
         }
-
-        // The final minimum value after processing all rows
-        return prevMin;
+        return prevmin;
     }
 }
